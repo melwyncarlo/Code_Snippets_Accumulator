@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Copyright 2021 Melwyn Francis Carlo
+
+clear
+
+rm -rf ../package/appimage/*
+
+jpackage -d ../package/appimage --verbose \
+--type "app-image" \
+--app-version "1.0" \
+--icon ../CodeSnippetsAccumulator/ui/res/img/icon.png \
+--copyright "2021 Melwyn Francis Carlo <carlo.melwyn@outlook.com>" \
+--description "An app for storing, searching, and retrieving code snippets" \
+--name "CodeSnippetsAccumulator" \
+--vendor "Melwyn Francis Carlo" \
+--input ../jar \
+--module-path ../openjfx/linux/jmod \
+--add-modules javafx.graphics,javafx.fxml,javafx.controls \
+--main-jar CodeSnippetsAccumulator.jar
+

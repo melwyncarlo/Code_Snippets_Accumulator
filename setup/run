@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Copyright 2021 Melwyn Francis Carlo
+
+cd ..
+
+java \
+--module-path openjfx/linux/sdk \
+--add-modules javafx.graphics,javafx.fxml,javafx.controls \
+CodeSnippetsAccumulator.App
+
+cd setup
+

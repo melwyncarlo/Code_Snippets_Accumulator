@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Copyright 2021 Melwyn Francis Carlo
+
+gnome-terminal -x bash -c "cd ..; package/appimage/CodeSnippetsAccumulator/bin/CodeSnippetsAccumulator; cd setup;"
+

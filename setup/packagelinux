@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Copyright 2021 Melwyn Francis Carlo
+
+clear
+
+rm -rf ../package/linux/deb/*
+rm -rf ../package/linux/rpm/*
+
+jpackage -d ../package/linux/deb --verbose \
+--type "deb" \
+--app-version "1.0" \
+--icon ../CodeSnippetsAccumulator/ui/res/img/icon.png \
+--copyright "2021 Melwyn Francis Carlo <carlo.melwyn@outlook.com>" \
+--description "An app for storing, searching, and retrieving code snippets" \
+--name "CodeSnippetsAccumulator" \
+--vendor "Melwyn Francis Carlo" \
+--input ../jar \
+--module-path ../openjfx/linux/jmod \
+--add-modules javafx.graphics,javafx.fxml,javafx.controls \
+--main-jar CodeSnippetsAccumulator.jar \
+--linux-deb-maintainer "carlo.melwyn@outlook.com" \
+--linux-menu-group "Office" \
+--linux-shortcut
+
+# JPackage for RPM leads to several missing libraries errors on my computer.
+
+#jpackage -d ../package/linux/rpm --verbose \
+#--type "rpm" \
+#--app-version "1.0" \
+#--icon ../CodeSnippetsAccumulator/ui/res/img/icon.png \
+#--copyright "2021 Melwyn Francis Carlo <carlo.melwyn@outlook.com>" \
+#--description "An app for storing, searching, and retrieving code snippets" \
+#--name "CodeSnippetsAccumulator" \
+#--vendor "Melwyn Francis Carlo" \
+#--input ../jar \
+#--module-path ../openjfx/linux/jmod \
+#--add-modules javafx.graphics,javafx.fxml,javafx.controls \
+#--main-jar CodeSnippetsAccumulator.jar \
+#--linux-deb-maintainer "carlo.melwyn@outlook.com" \
+#--linux-menu-group "Office" \
+#--linux-shortcut
+

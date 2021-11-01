@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Copyright 2021 Melwyn Francis Carlo
+
+clear
+
+jar cvmf ../jar/MANIFEST.MF ../jar/CodeSnippetsAccumulator.jar ../CodeSnippetsAccumulator
+

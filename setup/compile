@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Copyright 2021 Melwyn Francis Carlo
+
+clear
+
+javac -d ../ -verbose -Xdiags:verbose -Xlint:unchecked -Werror --release 11 \
+--module-path ../openjfx/linux/sdk \
+--add-modules javafx.graphics,javafx.fxml,javafx.controls \
+../App.java ../Model.java ../View.java ../Controller.java
+
