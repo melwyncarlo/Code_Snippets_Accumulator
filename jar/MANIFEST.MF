@@ -1,1 +1,1 @@
-Main-Class:  CodeSnippetsAccumulator/App
+Main-Class: CodeSnippetsAccumulator/App
