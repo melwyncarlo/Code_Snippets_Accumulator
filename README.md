@@ -8,8 +8,14 @@
 
 **Note:**
 
-* Download the [\*.deb file](https://github.com/melwyncarlo/Code_Snippets_Accumulator/blob/main/package/linux/deb/codesnippetsaccumulator_1.0-1_amd64.deb?raw=true) to run on Linux.
+* Download the [\*.deb file](https://github.com/melwyncarlo/Code_Snippetfs_Accumulator/blob/main/package/linux/deb/codesnippetsaccumulator_1.0-1_amd64.deb?raw=true) to run on Linux. As I am not experienced in packaging java applications for native systems, the \*.deb file has not been tested, and may be subject to errors.
 
-* Download the [\*.jar file](https://github.com/melwyncarlo/Code_Snippets_Accumulator/blob/main/jar/CodeSnippetsAccumulator.jar?raw=true) to run on any operating System (Windows, Linux, MacOS, etc.) having one of the JREs (e.g. [OpenJDK](https://jdk.java.net/17/)) installed.
+* Download the [\*.jar file](https://github.com/melwyncarlo/Code_Snippets_Accumulator/blob/main/jar/CodeSnippetsAccumulator.jar?raw=true) to run on any operating System (Windows, Linux, MacOS, etc.) having one of the JREs (e.g. [OpenJDK](https://jdk.java.net/17/)) installed. The \*.jar file is guaranteed to work using a Java Runtime Environment (JRE); also referred to as Java Virtual Machine (JVM).
 
 * To compile and build native executables, make sure to download the relevant [OpenJFX Version 17.0.1 SDK/JMod files](https://gluonhq.com/products/javafx/).
+
+* If you're using the `package` shell script for the `jpackage` command (in order to generate the *app-image*), make sure to make the following change, following the `package` script, but preceding the `runpkg` script:
+
+    * At the following relative path, `package/appimage/CodeSnippetsAccumulator/lib/app`, in the following file, `CodeSnippetsAccumulator.cfg`, replace `app.mainclass= CodeSnippetsAccumulator/App` with `app.mainclass=CodeSnippetsAccumulator/App`.
+
+    * The additional space has been removed as it causes an error during run-time. Also, the generation of the space itself could be an OpenJDK bug.
