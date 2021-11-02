@@ -275,14 +275,10 @@ public class Controller
                 languageField.getItems().addAll(Model.languageFieldList);
 
                 languageField.setValue(Model.EditWindowData.language);
-
-                titleField.setText(Model.EditWindowData.title);
-
-                codeField.setText(Model.EditWindowData.code);
-
-                notesField.setText(Model.EditWindowData.notes);
-
-                tagsField.setText(Model.EditWindowData.tags);
+                   titleField.setText (Model.EditWindowData.title);
+                   notesField.setText (Model.EditWindowData.notes);
+                    codeField.setText (Model.EditWindowData.code);
+                    tagsField.setText (Model.EditWindowData.tags);
             }
         }
 }
