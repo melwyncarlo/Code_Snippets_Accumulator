@@ -19,3 +19,13 @@
     * At the following relative path, `package/appimage/CodeSnippetsAccumulator/lib/app`, in the following file, `CodeSnippetsAccumulator.cfg`, replace `app.mainclass= CodeSnippetsAccumulator/App` with `app.mainclass=CodeSnippetsAccumulator/App`.
 
     * The additional space has been removed as it causes an error during run-time. Also, the generation of the space itself could be an OpenJDK bug.
+
+* If you're compiling normally, using the `javac` and `java` commands, then make the following changes in the `Model.java` file:
+
+   * *Un-comment* the code at line number 302 :
+      `private static String APP_DIR_PATH = "CodeSnippetsAccumulator";` 
+
+   * *Comment* out the code at line number 304 :
+      `private static String APP_DIR_PATH = System.getProperty("filepath");` 
+      
+   * If you're compiling for packaging purposes using `package` or `jpackage`, then reverse the above changes.
