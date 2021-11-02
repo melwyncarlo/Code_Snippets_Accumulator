@@ -1,41 +1,35 @@
 package CodeSnippetsAccumulator;
 
 import javafx.fxml.FXML;
+import java.util.ArrayList;
 import javafx.scene.text.Text;
-import javafx.scene.text.Font;
-import java.util.regex.Pattern;
-import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.application.Platform;
-import javafx.scene.text.FontWeight;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
-
-import javafx.scene.Node;
-import javafx.scene.text.TextFlow;
-import javafx.scene.control.Label;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ScrollPane;
-
 import javafx.scene.control.TableRow;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.ArrayList;
-import javafx.util.Duration;
-import javafx.application.Platform;
-import javafx.animation.PauseTransition;
+/*
+   Copyright 2021 Melwyn Francis Carlo <carlo.melwyn@outlook.com>
 
-/* Copyright 2021 Melwyn Francis Carlo */
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 public class Controller
 {
@@ -46,9 +40,10 @@ public class Controller
         public static final double   NORMAL_WAIT_TIME_IN_SECONDS = 0.25;
         public static final double SPLASH_SCREEN_TIME_IN_SECONDS = 2.00;
 
+        public static SimpleBooleanProperty performSearchDataTableUpdate = new SimpleBooleanProperty(false);
+
 
     /* Private class variables */
-        private static boolean performSearchDataTableUpdate = false;
 
 
     /* Private FXML variables */
@@ -96,22 +91,6 @@ public class Controller
 
 
     /* Private class functions */
-        private void forceFocus(Node node)
-        {
-            PauseTransition waitTimedTask = new PauseTransition(Duration.seconds(SMALL_WAIT_TIME_IN_SECONDS));
-
-            waitTimedTask.setOnFinished(event -> 
-            {
-                if (!node.isFocused())
-                    {
-                        node.requestFocus();
-                        forceFocus(node);
-                    }
-            });
-
-            waitTimedTask.play();
-        }
-
         private void updateSearchDataTable(String arg1, boolean arg2, boolean arg3, boolean arg4, String arg5)
         {
             View.setMouseCursorToWait();
@@ -147,10 +126,15 @@ public class Controller
             }
         }
 
+        public static void dataDirectoryCheck()
+        {
+            Model.checkOrCreateDataDirectory();
+        }
 
-    /* Public FXML functions */
+
+    /* Private FXML functions */
         @FXML
-        void addNewCode(ActionEvent event)
+        private void addNewCode(ActionEvent event)
         {
             event.consume();
 
@@ -158,7 +142,7 @@ public class Controller
         }
 
         @FXML
-        void goBack(ActionEvent event)
+        private void goBack(ActionEvent event)
         {
             event.consume();
 
@@ -166,7 +150,7 @@ public class Controller
         }
 
         @FXML
-        void searchForCode(ActionEvent event)
+        private void searchForCode(ActionEvent event)
         {
             event.consume();
 
@@ -178,7 +162,7 @@ public class Controller
         }
 
         @FXML
-        void saveData(ActionEvent event)
+        private void saveData(ActionEvent event)
         {
             if (Model.EditWindowData.compare( languageField.getValue(), 
                                                  titleField.getText(), 
@@ -198,14 +182,18 @@ public class Controller
                 {
                     Model.EditWindowData.delete();
 
-                    performSearchDataTableUpdate = true;
+                    performSearchDataTableUpdate.set(true);
 
                     View.closeEditWindow();
                 }
             }
             else
             {
-                if (titleField.getText().trim().length() < Model.TITLE_FIELD_CHARS_MIN)
+                if (languageField.getValue().trim().length() == 0)
+                {
+                    View.showNotificationAlert( "The language field cannot be blank.");
+                }
+                else if (titleField.getText().trim().length() < Model.TITLE_FIELD_CHARS_MIN)
                 {
                     View.showNotificationAlert( "The title field cannot be less than " + 
                                                  Model.TITLE_FIELD_CHARS_MIN + 
@@ -221,7 +209,7 @@ public class Controller
                 {
                     Model.EditWindowData.save();
 
-                    performSearchDataTableUpdate = true;
+                    performSearchDataTableUpdate.set(true);
 
                     View.closeEditWindow();
                 }
@@ -229,7 +217,7 @@ public class Controller
         }
 
         @FXML
-        void searchTableClicked(MouseEvent event)
+        private void searchTableClicked(MouseEvent event)
         {
             if (event.getClickCount() == 2 && (!searchDataTable.getItems().isEmpty()))
             {
@@ -243,11 +231,26 @@ public class Controller
             }
         }
 
+    /* Public FXML functions */
         @FXML
         public void initialize()
         {
             if (windowNumber == 1)
             {
+                performSearchDataTableUpdate.addListener((observableValue, oldState, newState) ->
+                {
+                    if (newState)
+                    {
+                        updateSearchDataTable( Model.SearchData.searchParameter1, 
+                                               Model.SearchData.searchParameter2, 
+                                               Model.SearchData.searchParameter3, 
+                                               Model.SearchData.searchParameter4, 
+                                               Model.SearchData.searchParameter5);
+
+                        performSearchDataTableUpdate.set(false);
+                    }
+                });
+
                 searchLanguageField.getItems().add("All");
                 searchLanguageField.getItems().addAll(Model.languageFieldList);
 
@@ -259,20 +262,7 @@ public class Controller
 
                 searchDataTable.focusedProperty().addListener((observableValue, formerlyFocused, currentlyFocused) ->
                 {
-                    if (currentlyFocused)
-                    {
-                        if (performSearchDataTableUpdate)
-                        {
-                            updateSearchDataTable( Model.SearchData.searchParameter1, 
-                                                   Model.SearchData.searchParameter2, 
-                                                   Model.SearchData.searchParameter3, 
-                                                   Model.SearchData.searchParameter4, 
-                                                   Model.SearchData.searchParameter5);
-
-                            performSearchDataTableUpdate = false;
-                        }
-                    }
-                    else
+                    if (!currentlyFocused)
                     {
                         searchDataTable.getSelectionModel().clearSelection();
                     }
@@ -282,7 +272,6 @@ public class Controller
             }
             else if (windowNumber == 2)
             {
-                languageField.getItems().add("All");
                 languageField.getItems().addAll(Model.languageFieldList);
 
                 languageField.setValue(Model.EditWindowData.language);
@@ -296,16 +285,5 @@ public class Controller
                 tagsField.setText(Model.EditWindowData.tags);
             }
         }
-
-
-    /* Event handlers */
-        EventHandler<KeyEvent> keyPressedHandler = new EventHandler<KeyEvent>()
-        {
-            @Override
-            public void handle(KeyEvent event)
-            {
-                event.consume();
-            }
-        };
 }
 

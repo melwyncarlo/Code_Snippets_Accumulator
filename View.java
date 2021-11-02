@@ -1,25 +1,36 @@
 package CodeSnippetsAccumulator;
 
-import javafx.animation.PauseTransition;
-import javafx.application.Application;
-import javafx.scene.image.Image;
-import javafx.stage.StageStyle;
-import javafx.fxml.FXMLLoader;
-import javafx.stage.Modality;
-import javafx.util.Duration;
-import javafx.scene.Cursor;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.Optional;
-
+import javafx.scene.Parent;
+import javafx.scene.Cursor;
+import javafx.util.Duration;
+import javafx.stage.Modality;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.StageStyle;
+import javafx.scene.image.Image;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
+import javafx.application.Application;
 import javafx.scene.control.ButtonType;
+import javafx.animation.PauseTransition;
 import javafx.scene.control.Alert.AlertType;
 
-/* Copyright 2021 Melwyn Francis Carlo */
+/*
+   Copyright 2021 Melwyn Francis Carlo <carlo.melwyn@outlook.com>
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 public class View extends Application
 {
@@ -70,6 +81,8 @@ public class View extends Application
         {
             try
             {
+                Controller.dataDirectoryCheck();
+
                 final Parent rootNode = FXMLLoader.load(View.class.getResource("ui" + Model.FILE_SEPARATOR + "SearchWindow.fxml"));
 
                 Stage newPrimaryStage = new Stage();
@@ -83,8 +96,12 @@ public class View extends Application
                 newPrimaryStage.show();
 
                 primaryStage.hide();
-
                 primaryStage = newPrimaryStage;
+
+                primaryStage.focusedProperty().addListener((observableValue, formerlyFocused, currentlyFocused) ->
+                {
+                    if (currentlyFocused) { Controller.performSearchDataTableUpdate.set(true); }
+                });
             }
             catch (Exception exception_object)
             {
@@ -137,7 +154,6 @@ public class View extends Application
         Controller.windowNumber = 1;
 
         secondaryStage.hide();
-
         secondaryStage = null;
 
         System.gc();
