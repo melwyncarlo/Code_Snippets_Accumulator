@@ -137,7 +137,6 @@ public class Controller
         private void addNewCode(ActionEvent event)
         {
             event.consume();
-
             View.launchEditWindow(0, "");
         }
 
@@ -145,7 +144,6 @@ public class Controller
         private void goBack(ActionEvent event)
         {
             event.consume();
-
             View.closeEditWindow();
         }
 
@@ -153,7 +151,6 @@ public class Controller
         private void searchForCode(ActionEvent event)
         {
             event.consume();
-
             updateSearchDataTable( searchLanguageField.getValue(), 
                                    searchTitleField.isSelected(), 
                                    searchNotesField.isSelected(), 
@@ -181,9 +178,7 @@ public class Controller
                 if (View.showConfirmationAlert("delete"))
                 {
                     Model.EditWindowData.delete();
-
                     performSearchDataTableUpdate.set(true);
-
                     View.closeEditWindow();
                 }
             }
@@ -208,9 +203,7 @@ public class Controller
                 else if (View.showConfirmationAlert("save"))
                 {
                     Model.EditWindowData.save();
-
                     performSearchDataTableUpdate.set(true);
-
                     View.closeEditWindow();
                 }
             }
@@ -262,10 +255,7 @@ public class Controller
 
                 searchDataTable.focusedProperty().addListener((observableValue, formerlyFocused, currentlyFocused) ->
                 {
-                    if (!currentlyFocused)
-                    {
-                        searchDataTable.getSelectionModel().clearSelection();
-                    }
+                    if (!currentlyFocused) { searchDataTable.getSelectionModel().clearSelection(); }
                 });
 
                 updateSearchDataTable("All", true, false, false, "");

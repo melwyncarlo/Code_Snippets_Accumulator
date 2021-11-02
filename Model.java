@@ -352,17 +352,13 @@ public class Model
                     {
                         if (!outFile.createNewFile())
                         {
-                            System.out.println( "Error: Cannot create file '" + 
-                                                 filePathString + 
-                                                "'.");
+                            System.out.println( "Error: Cannot create file '" + filePathString + "'.");
                             System.exit(1);
                         }
                     }
                     else
                     {
-                        System.out.println( "Error: File '" + 
-                                             filePathString + 
-                                            "' does not exist.");
+                        System.out.println( "Error: File '" + filePathString + "' does not exist.");
                         System.exit(1);
                     }
                 }
@@ -391,9 +387,7 @@ public class Model
             }
             catch (Exception exception_object)
             {
-                System.out.println( "Error: File '" + 
-                                     filePathString + 
-                                    "' does not exist.");
+                System.out.println( "Error: File '" + filePathString + "' does not exist.");
                 System.exit(1);
             }
             finally
