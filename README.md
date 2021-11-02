@@ -29,3 +29,17 @@
       `private static String APP_DIR_PATH = System.getProperty("filepath");` 
       
    * If you're compiling for packaging purposes using `package` or `jpackage`, then reverse the above changes.
+
+<br>
+
+![Screenshot 1](https://github.com/melwyncarlo/Code_Snippets_Accumulator/blob/main/package/0screenshots/1.png)
+
+![Screenshot 2](https://github.com/melwyncarlo/Code_Snippets_Accumulator/blob/main/package/0screenshots/2.png)
+
+![Screenshot 3](https://github.com/melwyncarlo/Code_Snippets_Accumulator/blob/main/package/0screenshots/3.png)
+
+![Screenshot 4](https://github.com/melwyncarlo/Code_Snippets_Accumulator/blob/main/package/0screenshots/4.png)
+
+![Screenshot 5](https://github.com/melwyncarlo/Code_Snippets_Accumulator/blob/main/package/0screenshots/5.png)
+
+
