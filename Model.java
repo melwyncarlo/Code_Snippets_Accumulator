@@ -299,9 +299,9 @@ public class Model
     /* Private class variables */
         private static Random random_generator_object = new Random();
 
-        /* private static String APP_DIR_PATH = "CodeSnippetsAccumulator"; */
+        /* private static String APP_DIR_PATH = System.getProperty("filepath"); */
 
-        private static String APP_DIR_PATH = System.getProperty("filepath");
+        private static String APP_DIR_PATH = "CodeSnippetsAccumulator";
 
         private static final String APP_DATA_DIR = APP_DIR_PATH + File.separator 
                                                  + "data"       + File.separator;

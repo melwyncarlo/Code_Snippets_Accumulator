@@ -14,15 +14,15 @@
 
 * To compile and build native executables, make sure to download the relevant [OpenJFX Version 17.0.1 SDK/JMod files](https://gluonhq.com/products/javafx/).
 
-* If you're compiling normally, using the `javac` and `java` commands, then make the following changes in the `Model.java` file:
+* If you're compiling for packaging, that is, using the `jpackage` command, following the `javac` and `jar` commands, then make the following changes to the `Model.java` file:
 
    * *Un-comment* the code at line number 302 :
-      `private static String APP_DIR_PATH = "CodeSnippetsAccumulator";` 
+      `private static String APP_DIR_PATH = System.getProperty("filepath");` 
 
    * *Comment* out the code at line number 304 :
-      `private static String APP_DIR_PATH = System.getProperty("filepath");` 
+      `private static String APP_DIR_PATH = "CodeSnippetsAccumulator";` 
       
-   * If you're compiling for packaging purposes using `package` or `jpackage`, then reverse the above changes.
+   * If you're compiling normally (for JRE), using `javac` and `java`, then reverse the above changes.
 
 <br>
 
