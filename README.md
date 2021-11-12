@@ -8,7 +8,7 @@
 
 **Note:**
 
-* Download the [\*.deb file](https://github.com/melwyncarlo/Code_Snippetfs_Accumulator/blob/main/package/linux/deb/codesnippetsaccumulator_1.0-1_amd64.deb?raw=true) to run on Linux. As I am not experienced in packaging java applications for native systems, the \*.deb file has not been tested, and may be subject to errors.
+* Download the [\*.deb file](https://github.com/melwyncarlo/Code_Snippets_Accumulator/blob/main/package/linux/deb/codesnippetsaccumulator_1.0-1_amd64.deb?raw=true) to run on Linux. As I am not experienced in packaging java applications for native systems, the \*.deb file has not been tested, and may be subject to errors.
 
 * Download the [\*.jar file](https://github.com/melwyncarlo/Code_Snippets_Accumulator/blob/main/jar/CodeSnippetsAccumulator.jar?raw=true) to run on any operating System (Windows, Linux, MacOS, etc.) having one of the JREs (e.g. [OpenJDK](https://jdk.java.net/17/)) installed. The \*.jar file is guaranteed to work using a Java Runtime Environment (JRE); also referred to as Java Virtual Machine (JVM).
 
