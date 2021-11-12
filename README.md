@@ -14,12 +14,6 @@
 
 * To compile and build native executables, make sure to download the relevant [OpenJFX Version 17.0.1 SDK/JMod files](https://gluonhq.com/products/javafx/).
 
-* If you're using the `package` shell script for the `jpackage` command (in order to generate the *app-image*), make sure to make the following change, following the `package` script, but preceding the `runpkg` script:
-
-    * At the following relative path, `package/appimage/CodeSnippetsAccumulator/lib/app`, in the following file, `CodeSnippetsAccumulator.cfg`, replace `app.mainclass= CodeSnippetsAccumulator/App` with `app.mainclass=CodeSnippetsAccumulator/App`.
-
-    * The additional space has been removed as it causes an error during run-time. Also, the generation of the space itself could be an OpenJDK bug.
-
 * If you're compiling normally, using the `javac` and `java` commands, then make the following changes in the `Model.java` file:
 
    * *Un-comment* the code at line number 302 :
